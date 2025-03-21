@@ -1,0 +1,9 @@
+pandas==2.2.2 # for data manipulation
+numpy>=1.24.4 # for numerical computation
+scikit-learn==1.3.2 # for machine learning algorithms
+matplotlib==3.8.4 # for data visualization
+seaborn==0.12.2 # for data visualization
+jupyterlab==4.0.10 # for jupyter notebook
+scipy==1.11.4 # for scientific computing
+statsmodels==0.14.1 # for statistical modeling
+plotly==5.20.0 # for interactive data visualization
