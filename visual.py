@@ -65,4 +65,13 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title('Correlation Heatmap')
 plt.show()
 
+# Calculate the median Discover Weekly Engagement by Subscription Type
+median_engagement_by_subscription = df.groupby('subscription')['engagement(%)'].median().reset_index()
 
+# Plot the median Discover Weekly Engagement by Subscription Type
+plt.figure(figsize=(10, 6))
+sns.barplot(data=median_engagement_by_subscription, x='subscription', y='engagement(%)')
+plt.title('Median Discover Weekly Engagement by Subscription Type')
+plt.xlabel('Subscription Type')
+plt.ylabel('Median Discover Weekly Engagement (%)')
+plt.show()
