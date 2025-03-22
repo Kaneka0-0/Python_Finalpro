@@ -34,8 +34,8 @@ plt.ylabel('Count')
 plt.show()
 
 
-# Filter the data for age 15 to 45 and platform "YouTube"
-filtered_df = df[(df['age'] >= 15) & (df['age'] <= 45) & (df['platform'] == 'YouTube')]
+# Filter the data for age 15 to 45 and platform "Spotify"
+filtered_df = df[(df['age'] >= 15) & (df['age'] <= 60) & (df['platform'] == 'Spotify')]
 
 # Identify the top artist among these users
 top_artist = filtered_df['top_artist'].mode()[0]
@@ -43,10 +43,10 @@ top_artist = filtered_df['top_artist'].mode()[0]
 # Filter the data for the top artist
 top_artist_df = filtered_df[filtered_df['top_artist'] == top_artist]
 
-# Example of a regression plot
+# Regression plot for the repeat rate of the top artist by age
 plt.figure(figsize=(10, 6))
 sns.regplot(data=top_artist_df, x='age', y='repeat(%)')
-plt.title(f'Repeat Rate for Top Artist ({top_artist}) on YouTube (Users Aged 15-45)')
+plt.title(f'Repeat Rate for Top Artist ({top_artist}) on Spotify (Users Aged 15-60)')
 plt.xlabel('Age')
 plt.ylabel('Repeat Rate (%)')
 plt.grid(True)
@@ -56,22 +56,29 @@ plt.show()
 # Select only numeric columns (int and float) for the correlation matrix
 numeric_df = df.select_dtypes(include=[np.number])
 
-# Create a correlation matrix from the numeric DataFrame
+# Create a correlation matrix from the numeric DataFrame to use in heatmap
 corr_matrix = numeric_df.corr()
 
-# Plot the heatmap
+# Plot the heatmap- put details in the heatmap- only take numbers
 plt.figure(figsize=(6, 4))
 sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title('Correlation Heatmap')
 plt.show()
 
-# Calculate the median Discover Weekly Engagement by Subscription Type
-median_engagement_by_subscription = df.groupby('subscription')['engagement(%)'].median().reset_index()
+# Filter the data for platform "Spotify"
+spotify_df = df[df['platform'] == 'Spotify']
 
-# Plot the median Discover Weekly Engagement by Subscription Type
-plt.figure(figsize=(10, 6))
-sns.barplot(data=median_engagement_by_subscription, x='subscription', y='engagement(%)')
-plt.title('Median Discover Weekly Engagement by Subscription Type')
-plt.xlabel('Subscription Type')
-plt.ylabel('Median Discover Weekly Engagement (%)')
+# Calculate the mean Discover Weekly Engagement by Subscription Type for Spotify
+mean_engagement_by_subscription = spotify_df.groupby(['subscription', 'age'])['engagement(%)'].mean().reset_index()
+
+# Plot the mean Discover Weekly Engagement by Subscription Type for Spotify
+plt.figure(figsize=(8, 6))
+sns.barplot(data=mean_engagement_by_subscription, y='subscription', x='engagement(%)', hue='age')
+plt.title('Mean Discover Weekly Engagement by Subscription Type and age (Spotify)')
+plt.ylabel('Subscription Type')
+plt.xlabel('Mean Discover Weekly Engagement (%)')
+plt.legend(title='Age')
 plt.show()
+
+
+#predict- minutes streamed per day
