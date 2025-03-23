@@ -81,4 +81,39 @@ plt.legend(title='Age')
 plt.show()
 
 
-#predict- minutes streamed per day
+#predict results
+features = ['age', 'songs_liked', 'engagement(%)', 'repeat(%)']
+target = 'minutes_streamed'
+data = filtered_df[features + [target]].dropna()
+X = data[features]
+y = data[target]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+
+print(f"Mean Squared Error (MSE): {mse}")
+print(f"Mean Absolute Error (MAE): {mae}")
+print(f"Root Mean Squared Error (RMSE): {rmse}")
+print(f"R-Squared Score (R2): {r2}")
+
+# Residual Analysis
+residuals = y_test - y_pred
+plt.figure(figsize=(8, 5))
+sns.histplot(residuals, bins=30, kde=True)
+plt.xlabel("Residuals")
+plt.ylabel("Frequency")
+plt.title("Residual Distribution")
+plt.show()
+
+# Adjusted R-Squared Calculation
+n = len(y_test)  # Number of observations
+p = X_test.shape[1]  # Number of predictors
+adjusted_r2 = 1 - ((1 - r2) * (n - 1) / (n - p - 1))
+print(f"Adjusted R-Squared: {adjusted_r2}")
