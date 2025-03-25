@@ -114,14 +114,40 @@ print(f"Mean Absolute Error (MAE): \n {mae}\n ")  # Printing the Mean Absolute E
 print(f"Root Mean Squared Error (RMSE): \n {rmse}\n ")  # Printing the Root Mean Squared Error
 print(f"R-Squared Score (R2): \n {r2}\n ")  # Printing the R-squared score
 
-# Residual Analysis
-residuals = y_test - y_pred  # Calculating residuals
-plt.figure(figsize=(8, 5))  # Setting the figure size for the residual plot
-sns.histplot(residuals, bins=30, kde=True)  # Creating a histogram of the residuals
-plt.xlabel("Residuals")  # Labeling the x-axis
-plt.ylabel("Frequency")  # Labeling the y-axis
-plt.title("Residual Distribution")  # Setting the title of the plot
-plt.show()  # Displaying the plot
+
+
+# top_genre distribution plot
+plt.figure(figsize=(8, 5))
+sns.histplot(df['top_genre'], bins=20, kde=True, color='blue')
+plt.title('Distribution of Listener top_genre')
+plt.xlabel('top_genre')
+plt.ylabel('Count')
+plt.show()
+
+# Subscription Type vs. streaming minutes
+plt.figure(figsize=(12, 8))
+sns.boxplot(data=df, x='subscription', y='minutes_streamed', palette='colorblind')
+plt.title('Subscription vs. minutes_streamed')
+plt.xlabel('Subscription')
+plt.ylabel('minutes_streamed')
+plt.show()
+
+# # Residual Analysis
+# residuals = y_test - y_pred  # Calculating residuals
+# plt.figure(figsize=(8, 5))  # Setting the figure size for the residual plot
+# sns.histplot(residuals, bins=30, kde=True)  # Creating a histogram of the residuals
+# plt.xlabel("Residuals")  # Labeling the x-axis
+# plt.ylabel("Frequency")  # Labeling the y-axis
+# plt.title("Residual Distribution")  # Setting the title of the plot
+# plt.show()  # Displaying the plot
+
+# Minutes Streamed vs. Repeat Song Rate-----------------------new code
+plt.figure(figsize=(8, 5))
+sns.scatterplot(x=df['minutes_streamed'], y=df['engagement(%)'], alpha=0.5, color='green')
+plt.title('Minutes Streamed vs. engagement(%)')
+plt.xlabel('Minutes Streamed Per Day')
+plt.ylabel('engagement(%)')
+plt.show()
 
 # Adjusted R-Squared Calculation
 n = len(y_test)  # Number of observations

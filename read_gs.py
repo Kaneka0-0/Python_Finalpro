@@ -17,7 +17,10 @@ df = read_gs()
 print("Length of the data:", len(df))
 
 # Display the first few rows of the dataset
-# print ("Column Heads\n",df.head()) - use df.head() to display the first few rows of the dataset- we command this out becasue we want to display the renamed columns.
+print ("Column Heads\n",df.head()) 
+
+
+# - use df.head() to display the first few rows of the dataset- we command this out becasue we want to display the renamed columns.
 
 #summary of the dataset
 print("Suammary Statistic (Numeric values): \n",df.describe()) #summary of the dataset- use df.describe() to get the summary of the dataset.
@@ -33,7 +36,7 @@ df.rename(columns={
     "Streaming Platform": "platform",
     "Top Genre": "top_genre",
     "Minutes Streamed Per Day": "minutes_streamed",
-    "Number of Songs Liked": "songs_liked",   
+    "Number of Songs Liked": "songs_liked",
     "Most Played Artist": "top_artist",
     "Subscription Type": "subscription",
     "Listening Time (Morning/Afternoon/Night)": "listening_time",
@@ -41,7 +44,7 @@ df.rename(columns={
     "Repeat Song Rate (%)": "repeat(%)"
 }, inplace=True)
 
-#print("Column Heads (rename)\n",df.head())
+print("Column Heads (rename)\n",df.head())
 
 #check for missing value
 print("Missing values:\n",df.isnull().sum())
