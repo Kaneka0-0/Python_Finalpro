@@ -15,10 +15,7 @@ def read_gs():
 
 df = read_gs()
 print("Length of the data:", len(df))
-
-# Display the first few rows of the dataset
-print ("Column Heads\n",df.head()) 
-
+print ("Column Heads\n",df.head())
 
 # - use df.head() to display the first few rows of the dataset- we command this out becasue we want to display the renamed columns.
 
@@ -36,7 +33,7 @@ df.rename(columns={
     "Streaming Platform": "platform",
     "Top Genre": "top_genre",
     "Minutes Streamed Per Day": "minutes_streamed",
-    "Number of Songs Liked": "songs_liked",
+    "Number of Songs Liked": "songs_liked",   
     "Most Played Artist": "top_artist",
     "Subscription Type": "subscription",
     "Listening Time (Morning/Afternoon/Night)": "listening_time",
